@@ -135,7 +135,8 @@ Called for "dNG.pas.upnp.service.ContentDirectory.x_get_feature_list"
 				elif (entry_type & MpEntry.TYPE_CDS_ITEM_IMAGE == MpEntry.TYPE_CDS_ITEM_IMAGE): _type = "object.item.imageItem"
 				elif (entry_type & MpEntry.TYPE_CDS_CONTAINER_VIDEO == MpEntry.TYPE_CDS_CONTAINER_VIDEO): _type = "object.item.videoItem"
 				elif (entry_type & MpEntry.TYPE_CDS_ITEM_VIDEO == MpEntry.TYPE_CDS_ITEM_VIDEO): _type = "object.item.videoItem"
-				else: _type = "object"
+				elif (entry_type & MpEntry.TYPE_CDS_CONTAINER == MpEntry.TYPE_CDS_CONTAINER): _type = "object.container"
+				else: _type = "object.item"
 
 				attributes = { "id": entry.get_id(), "type": _type }
 				xml_resource.add_node("{0} container".format(xml_base_path), attributes = attributes)
