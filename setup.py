@@ -67,6 +67,8 @@ with TemporaryDirectory(dir = ".") as build_directory:
 	      license = "GPLv2+",
 	      url = "https://www.direct-netware.de/redirect?mp;plugins_samsung",
 
+	      platforms = [ "any" ],
+
 	      package_dir = { "": _build_path },
 	      packages = [ "dNG" ],
 
