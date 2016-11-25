@@ -23,7 +23,7 @@ more details.
 
 You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc.,
-59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 ----------------------------------------------------------------------------
 https://www.direct-netware.de/redirect?licenses;gpl
 ----------------------------------------------------------------------------
@@ -33,16 +33,16 @@ https://www.direct-netware.de/redirect?licenses;gpl
 
 # pylint: disable=import-error,no-name-in-module,unused-argument
 
+from dNG.data.upnp.resources.mp_entry import MpEntry
 from dNG.data.xml_resource import XmlResource
-from dNG.pas.data.upnp.resources.mp_entry import MpEntry
-from dNG.pas.database.connection import Connection
-from dNG.pas.plugins.hook import Hook
-from dNG.pas.runtime.value_exception import ValueException
+from dNG.database.connection import Connection
+from dNG.plugins.hook import Hook
+from dNG.runtime.value_exception import ValueException
 
 def get_children(params, last_return = None):
 #
 	"""
-Called for "dNG.mp.upnp.HookResource.getChildren"
+Called for "mp.upnp.HookResource.getChildren"
 
 :param params: Parameter specified
 :param last_return: The return value from the last hook called.
@@ -69,7 +69,7 @@ Called for "dNG.mp.upnp.HookResource.getChildren"
 def get_features(params, last_return = None):
 #
 	"""
-Called for "dNG.pas.upnp.service.ContentDirectory.getFeatures"
+Called for "dNG.pas.upnp.services.ContentDirectory.getFeatures"
 
 :param params: Parameter specified
 :param last_return: The return value from the last hook called.
@@ -112,7 +112,7 @@ Called for "dNG.pas.upnp.service.ContentDirectory.getFeatures"
 def get_resource_data(params, last_return = None):
 #
 	"""
-Called for "dNG.mp.upnp.HookResource.getResourceData"
+Called for "mp.upnp.HookResource.getResourceData"
 
 :param params: Parameter specified
 :param last_return: The return value from the last hook called.
@@ -202,10 +202,10 @@ Register plugin hooks.
 :since: v0.1.00
 	"""
 
-	Hook.register("dNG.mp.upnp.HookResource.getChildren", get_children)
-	Hook.register("dNG.mp.upnp.HookResource.getResourceData", get_resource_data)
-	Hook.register("dNG.pas.upnp.service.ContentDirectory.getFeatures", get_features)
-	Hook.register("dNG.pas.upnp.service.ContentDirectory.x_get_feature_list", x_get_feature_list)
+	Hook.register("mp.upnp.HookResource.getChildren", get_children)
+	Hook.register("mp.upnp.HookResource.getResourceData", get_resource_data)
+	Hook.register("dNG.pas.upnp.services.ContentDirectory.getFeatures", get_features)
+	Hook.register("dNG.pas.upnp.services.ContentDirectory.handle.x_get_feature_list", x_get_feature_list)
 	Hook.register("dNG.pas.upnp.Service.initHost", init_host)
 #
 
@@ -217,17 +217,17 @@ Unregister plugin hooks.
 :since: v0.1.00
 	"""
 
-	Hook.unregister("dNG.mp.upnp.HookResource.getChildren", get_children)
-	Hook.unregister("dNG.mp.upnp.HookResource.getResourceData", get_resource_data)
-	Hook.unregister("dNG.pas.upnp.service.ContentDirectory.getFeatures", get_features)
-	Hook.unregister("dNG.pas.upnp.service.ContentDirectory.x_get_feature_list", x_get_feature_list)
+	Hook.unregister("mp.upnp.HookResource.getChildren", get_children)
+	Hook.unregister("mp.upnp.HookResource.getResourceData", get_resource_data)
+	Hook.unregister("dNG.pas.upnp.services.ContentDirectory.getFeatures", get_features)
+	Hook.unregister("dNG.pas.upnp.services.ContentDirectory.handle.x_get_feature_list", x_get_feature_list)
 	Hook.unregister("dNG.pas.upnp.Service.initHost", init_host)
 #
 
 def x_get_feature_list(params, last_return = None):
 #
 	"""
-Called for "dNG.pas.upnp.service.ContentDirectory.x_get_feature_list"
+Called for "dNG.pas.upnp.services.ContentDirectory.handle.x_get_feature_list"
 
 :param params: Parameter specified
 :param last_return: The return value from the last hook called.
@@ -251,7 +251,7 @@ Called for "dNG.pas.upnp.service.ContentDirectory.x_get_feature_list"
 
 		xml_resource.set_cached_node("Features")
 
-		Hook.call("dNG.pas.upnp.service.ContentDirectory.getFeatures", xml_resource = xml_resource)
+		Hook.call("dNG.pas.upnp.services.ContentDirectory.getFeatures", xml_resource = xml_resource)
 
 		_return = "<?xml version='1.0' encoding='UTF-8' ?>{0}".format(xml_resource.export_cache(True))
 	#
